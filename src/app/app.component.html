@@ -38,7 +38,7 @@
 
     <label>Nuevo Tipo de Cambio</label>
 		<input type="text" formControlName="exchangeType" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.exchangeType.errors }" />
-		<div *ngIf="changeMoneyForm.get('exchangeType').hasError('required')" class="invalid-feedback">
+		<div *ngIf="changeMoneyForm.controls.exchangeType.hasError('required')" class="invalid-feedback">
 			Se debe ingresar el nuevo tipo de cambio
 		</div>
 

@@ -32,9 +32,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const shouldBypass = this.shouldBypass(req.url);
-    const token: string = localStorage.getItem('token');
+    const token: string = localStorage.getItem('token') || '';
 
-    if (token) {
+    if (token && token !== '') {
       req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     }
 

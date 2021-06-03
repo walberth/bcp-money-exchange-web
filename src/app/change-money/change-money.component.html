@@ -10,7 +10,7 @@
 
     <label>Monto</label>
 		<input type="text" formControlName="monto" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monto.errors }" />
-		<div *ngIf="changeMoneyForm.get('monto').hasError('required')" class="invalid-feedback">
+		<div *ngIf="changeMoneyForm.controls.monto.hasError('required')" class="invalid-feedback">
 			Se debe ingresar un monto
 		</div>
 

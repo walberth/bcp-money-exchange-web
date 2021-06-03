@@ -42,7 +42,7 @@ export class ChangeMoneyComponent implements OnInit {
     receiveExchange.monto = +this.changeMoneyForm.controls.monto.value;
 
     this.exchangeService
-      .realizeMoneyExchange(receiveExchange)
+      .performMoneyExchange(receiveExchange)
       .pipe(first())
       .subscribe((response) => {
         if (response !== null) {

@@ -1,4 +1,4 @@
 export class ListColumn {
   name?: string;
-  property: string;
+  property: string = '';
 }

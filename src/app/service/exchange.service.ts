@@ -20,9 +20,9 @@ export class ExchangeService {
     );
   }
 
-  realizeMoneyExchange(exchange: Exchange): Observable<Response<any>> {
+  performMoneyExchange(exchange: Exchange): Observable<Response<any>> {
     return this.httpClient.post<Response<any>>(
-      `${environment.backend}/${Constant.ExchangeApi}`,
+      `${environment.backend}/${Constant.ExchangeApi}/perform`,
       JSON.stringify(exchange)
     );
   }
