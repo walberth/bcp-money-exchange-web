@@ -1,41 +1,27 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<h1>My Custom Table</h1>
+<h1>Tipos de Cambio Registrados</h1>
 <hr>
 
 <table id="users">
   <tr>
-    <th *ngFor = "let column of headers">
-      {{column}}
+    <th *ngFor = "let column of columns">
+      {{column.name}}
     </th>
   </tr>
 
-  <tr *ngFor = "let row of rows">
-    <td *ngFor = "let column of headers">
-      {{row[column]}}
+  <tr *ngFor = "let row of rows" (click)="select(row)">
+    <td *ngFor = "let column of columns">
+      {{row[column.property]}}
     </td>
   </tr>
 </table>
 
 <hr>
-<app-change-money></app-change-money>
-
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
+<div class="container">
+  <div class="text-center">
+    <button class="btn btn-warning mr-1" (click)="holi()">Autenticar</button>
+  </div>
+</div>
+<app-change-money [exchangeSelected] = exchangeSelected></app-change-money>
 
 
 <router-outlet></router-outlet>

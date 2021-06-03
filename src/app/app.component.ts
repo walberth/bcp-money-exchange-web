@@ -1,69 +1,92 @@
-import { Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
+import { ExchangeService } from './service/exchange.service';
+import {
+  first,
+  filter,
+  distinctUntilChanged,
+  debounceTime,
+} from 'rxjs/operators';
+import { ExchangeType } from './model/exchange-type';
+import { ListColumn } from './model/list-column';
+import { AuthenticationService } from './service/authentication.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'money-exchange-web';
-  headers: string[] = ["ID", "Name", "Age", "Gender", "Country"];
-  rows: any[] = [
+  columns: ListColumn[] = [
     {
-      "ID" : "1",
-      "Name" : "Rahul",
-      "Age" : "21",
-      "Gender" : "Male",
-      "Country" : "India"
+      name: 'Moneda Origen°',
+      property: 'monedaOrigen',
     },
     {
-      "ID" : "2",
-      "Name" : "Ajay",
-      "Age" : "25",
-      "Gender" : "Male",
-      "Country" : "India"
+      name: 'Moneda Destino',
+      property: 'monedaDestino',
     },
     {
-      "ID" : "3",
-      "Name" : "Vikram",
-      "Age" : "31",
-      "Gender" : "Male",
-      "Country" : "Australia"
+      name: 'Tipo Cambio',
+      property: 'tipoCambio',
     },
-    {
-      "ID" : "4",
-      "Name" : "Riya",
-      "Age" : "20",
-      "Gender" : "Female",
-      "Country" : "India"
-    },
-    {
-      "ID" : "5",
-      "Name" : "John",
-      "Age" : "23",
-      "Gender" : "Male",
-      "Country" : "USA"
-    },
-    {
-      "ID" : "6",
-      "Name" : "Raman",
-      "Age" : "27",
-      "Gender" : "Male",
-      "Country" : "India"
-    },
-    {
-      "ID" : "7",
-      "Name" : "Mohan",
-      "Age" : "39",
-      "Gender" : "Male",
-      "Country" : "India"
-    },
-    {
-      "ID" : "8",
-      "Name" : "Shreya",
-      "Age" : "21",
-      "Gender" : "Female",
-      "Country" : "India"
-    }
-  ];
+  ] as ListColumn[];
+  rows: ExchangeType[] = [];
+  exchangeSelected?: ExchangeType;
+
+  constructor(private exchangeService: ExchangeService,
+    private authenticationService: AuthenticationService) {
+  }
+
+  ngOnInit(): void {
+    this.getExchangeTypes();
+  }
+
+  getExchangeTypes() {
+    this.exchangeService
+      .getExchangeTypes()
+      .pipe(first())
+      .subscribe((response) => {
+        if (response !== null) {
+          if (response.isSuccess) {
+            if (!response.isWarning) {
+              if(response.data) {
+                this.rows = response.data;
+              }
+            } else {
+              alert(response.message);
+            }
+          } else {
+            alert(response.message);
+          }
+        }
+      });
+  }
+
+  select(row: ExchangeType) {
+    console.log(row);
+    this.exchangeSelected = row;
+  }
+
+  holi(){
+    console.log('hola papa');
+    this.authenticationService
+      .generateJwt()
+      .pipe(first())
+      .subscribe((response) => {
+        if (response !== null) {
+          if (response.isSuccess) {
+            if (!response.isWarning) {
+              if(response.data) {
+                localStorage.setItem('token', response.data);
+              }
+            } else {
+              alert(response.message);
+            }
+          } else {
+            alert(response.message);
+          }
+        }
+      });
+  }
 }

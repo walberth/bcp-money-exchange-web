@@ -3,13 +3,13 @@
     <h3>Cambiar Dinero</h3>
 
     <label>Moneda Origen</label>
-		<input type="text" formControlName="monedaOrigen" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monedaOrigen.errors }" />
+		<input type="text" [readonly]="true" class="form-control" value="{{exchangeSelected?.monedaOrigen}}" />
 		<div *ngIf="changeMoneyForm.get('monedaOrigen').hasError('required')" class="invalid-feedback">
 			Se debe ingresar una moneda de origen
 		</div>
 
     <label>Moneda Destino</label>
-		<input type="text" formControlName="monedaDestino" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monedaDestino.errors }" />
+		<input type="text" [readonly]="true" class="form-control" value="{{exchangeSelected?.monedaDestino}}" />
 		<div *ngIf="changeMoneyForm.get('monedaDestino').hasError('required')" class="invalid-feedback">
 			Se debe ingresar una moneda de destino
 		</div>
