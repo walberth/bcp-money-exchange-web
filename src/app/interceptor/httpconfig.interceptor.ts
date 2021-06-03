@@ -57,6 +57,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError(error => {
+        debugger;
         if (error.status === 401) {
           alert('No esta autorizado para consumir este recurso');
         }

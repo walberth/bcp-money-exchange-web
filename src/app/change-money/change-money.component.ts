@@ -23,22 +23,19 @@ export class ChangeMoneyComponent implements OnInit {
   ngOnInit(): void {
     this.changeMoneyForm = this.formBuilder.group(
       {
-        monedaOrigen: null,
-        monedaDestino: null,
         monto: [null, Validators.required],
         montoObtenido: null,
       },
     );
   }
+
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.changeMoneyForm.invalid) {
       return;
     }
-//realizeMoneyExchange
-    // display form values on success
+
     const receiveExchange: Exchange = new Exchange();
     receiveExchange.monedaOrigen = this.exchangeSelected?.monedaOrigen;
     receiveExchange.monedaDestino = this.exchangeSelected?.monedaDestino;
@@ -48,7 +45,6 @@ export class ChangeMoneyComponent implements OnInit {
       .realizeMoneyExchange(receiveExchange)
       .pipe(first())
       .subscribe((response) => {
-        debugger;
         if (response !== null) {
           if (response.isSuccess) {
             if (!response.isWarning) {

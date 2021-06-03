@@ -16,12 +16,38 @@
 </table>
 
 <hr>
+
 <div class="container">
   <div class="text-center">
-    <button class="btn btn-warning mr-1" (click)="holi()">Autenticar</button>
+    <button class="btn btn-warning mr-1" (click)="authenticate()">Autenticar</button>
+    <button class="btn btn-secondary mr-1" (click)="desAuthenticate()">Desautenticar</button>
   </div>
 </div>
+
 <app-change-money [exchangeSelected] = exchangeSelected></app-change-money>
+
+<div class="container">
+	<form (ngSubmit)="onSubmit()" [formGroup]="changeMoneyForm">
+    <h3>Actualizar el Tipo de Cambio</h3>
+
+    <label>Moneda Origen</label>
+		<input type="text" [readonly]="true" class="form-control" value="{{exchangeSelected?.monedaOrigen}}" />
+
+    <label>Moneda Destino</label>
+		<input type="text" [readonly]="true" class="form-control" value="{{exchangeSelected?.monedaDestino}}" />
+
+    <label>Nuevo Tipo de Cambio</label>
+		<input type="text" formControlName="exchangeType" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.exchangeType.errors }" />
+		<div *ngIf="changeMoneyForm.get('exchangeType').hasError('required')" class="invalid-feedback">
+			Se debe ingresar el nuevo tipo de cambio
+		</div>
+
+    <div class="text-center">
+			<button class="btn btn-primary mr-1" [disabled]="changeMoneyForm.invalid">Actualizar</button>
+			<button class="btn btn-secondary" type="reset" (click)="onReset()">Cancelar</button>
+		</div>
+  </form>
+</div>
 
 
 <router-outlet></router-outlet>

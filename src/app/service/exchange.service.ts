@@ -26,4 +26,11 @@ export class ExchangeService {
       JSON.stringify(exchange)
     );
   }
+
+  changeMoneyExchangeType(exchange: Exchange): Observable<Response<any>> {
+    return this.httpClient.put<Response<any>>(
+      `${environment.backend}/${Constant.ExchangeApi}`,
+      JSON.stringify(exchange)
+    );
+  }
 }

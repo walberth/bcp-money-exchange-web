@@ -4,15 +4,9 @@
 
     <label>Moneda Origen</label>
 		<input type="text" [readonly]="true" class="form-control" value="{{exchangeSelected?.monedaOrigen}}" />
-		<div *ngIf="changeMoneyForm.get('monedaOrigen').hasError('required')" class="invalid-feedback">
-			Se debe ingresar una moneda de origen
-		</div>
 
     <label>Moneda Destino</label>
 		<input type="text" [readonly]="true" class="form-control" value="{{exchangeSelected?.monedaDestino}}" />
-		<div *ngIf="changeMoneyForm.get('monedaDestino').hasError('required')" class="invalid-feedback">
-			Se debe ingresar una moneda de destino
-		</div>
 
     <label>Monto</label>
 		<input type="text" formControlName="monto" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monto.errors }" />

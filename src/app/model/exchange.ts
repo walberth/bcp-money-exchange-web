@@ -3,4 +3,5 @@ export class Exchange {
   monedaDestino?: string;
   monto?: number;
   montoCambiado?: number;
+  tipoCambio?: number;
 }
