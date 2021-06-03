@@ -1,0 +1,33 @@
+<div class="container">
+	<form (ngSubmit)="onSubmit()" [formGroup]="changeMoneyForm">
+    <h3>Cambiar Dinero</h3>
+
+    <label>Moneda Origen</label>
+		<input type="text" formControlName="monedaOrigen" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monedaOrigen.errors }" />
+		<div *ngIf="changeMoneyForm.get('monedaOrigen').hasError('required')" class="invalid-feedback">
+			Se debe ingresar una moneda de origen
+		</div>
+
+    <label>Moneda Destino</label>
+		<input type="text" formControlName="monedaDestino" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monedaDestino.errors }" />
+		<div *ngIf="changeMoneyForm.get('monedaDestino').hasError('required')" class="invalid-feedback">
+			Se debe ingresar una moneda de destino
+		</div>
+
+    <label>Monto</label>
+		<input type="text" formControlName="monto" class="form-control" [ngClass]="{ 'is-invalid':  changeMoneyForm.controls.monto.errors }" />
+		<div *ngIf="changeMoneyForm.get('monto').hasError('required')" class="invalid-feedback">
+			Se debe ingresar un monto
+		</div>
+
+    <div *ngIf="submitted">
+      <label>Dinero Obtenido</label>
+      <input [readonly]="true" type="text" class="form-control" formControlName="montoObtenido" matInput>
+    </div>
+
+    <div class="text-center">
+			<button class="btn btn-primary mr-1" [disabled]="changeMoneyForm.invalid">Cambiar</button>
+			<button class="btn btn-secondary" type="reset" (click)="onReset()">Cancelar</button>
+		</div>
+  </form>
+</div>

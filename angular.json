@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "money-exchange-web"
+  "defaultProject": "money-exchange-web",
+  "cli": {
+    "analytics": false
+  }
 }
